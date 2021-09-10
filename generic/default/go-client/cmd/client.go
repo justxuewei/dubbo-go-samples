@@ -27,16 +27,13 @@ import (
 )
 
 import (
-	_ "dubbo.apache.org/dubbo-go/v3/cluster/cluster_impl"
-	_ "dubbo.apache.org/dubbo-go/v3/cluster/loadbalance"
 	"dubbo.apache.org/dubbo-go/v3/common/logger"
-	_ "dubbo.apache.org/dubbo-go/v3/common/proxy/proxy_factory"
 	"dubbo.apache.org/dubbo-go/v3/config"
 	"dubbo.apache.org/dubbo-go/v3/config/generic"
-	_ "dubbo.apache.org/dubbo-go/v3/filter/filter_impl"
+	_ "dubbo.apache.org/dubbo-go/v3/imports"
 	"dubbo.apache.org/dubbo-go/v3/protocol/dubbo"
-	_ "dubbo.apache.org/dubbo-go/v3/registry/protocol"
-	_ "dubbo.apache.org/dubbo-go/v3/registry/zookeeper"
+
+	tpconst "github.com/dubbogo/triple/pkg/common/constant"
 
 	hessian "github.com/apache/dubbo-go-hessian2"
 )
@@ -66,7 +63,15 @@ func main() {
 	//callQueryAll(dubboRefConf)
 
 	// generic invocation samples using hessian serialization on Triple protocol
-	//tripleRefConf := newRefConf("org.apache.dubbo.samples.UserProviderTriple", tpconst.TRIPLE)
+	tripleRefConf := newRefConf("org.apache.dubbo.samples.UserProviderTriple", tpconst.TRIPLE)
+
+	callGetUser(tripleRefConf)
+	//callGetOneUser(tripleRefConf)
+	callGetUsers(tripleRefConf)
+	callGetUsersMap(tripleRefConf)
+	callQueryUser(tripleRefConf)
+	callQueryUsers(tripleRefConf)
+	//callQueryAll(tripleRefConf)
 
 	initSignal()
 }
